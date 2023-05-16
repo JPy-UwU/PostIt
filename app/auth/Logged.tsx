@@ -4,10 +4,17 @@ import Image from "next/image"
 import { signOut } from "next-auth/react"
 import Link from "next/link"
 
-export default function Logged() {
+type User = {
+  image: string
+}
+
+export default function Logged({ image }: User) {
   return(
     <li className="flex gap-8 items-center">
-      <button>Sign Out</button>
+      <button onClick={() => signOut()} className="bg-gray-800 text-white text-sm px-6 py-2 rounded-md">Sign Out</button>
+      <Link href={"/dashboard"}>
+        <Image width={ 64 } height={ 64 } className="w-14 rounded-full" src={ image } alt="" priority/>
+      </Link>
     </li>
   )
 }
